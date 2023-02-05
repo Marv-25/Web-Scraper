@@ -21,27 +21,28 @@ for i in tags:
     url = re.search("^https://labarrica.com/shop/.+/$",link)
     if url:
         valid_urls.append(url.group())
-    
+valid_urls = list(set(valid_urls))
 ## function scrape declared to use to scrape each product info return 
 def scrape(url):
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     # html = soup.find(tag,specifier)
-    sku = soup.find("span", class_="sku") # <span class="sku_wrapper">SKU: <span class="sku">190904</span></span>
-    name = soup.find("h1", class_="product_title") # None # <h1 class="product_title entry-title">Gin Bombay Sapphire 1000ml</h1>
-    category = soup.find("a", attrs="taglabarrica.com/category")#None # <span class="posted_in">Categorías: <a href="https://labarrica.com/category/licores/gin/" rel="taglabarrica.com/category/licores/" rel="tag">Licores</a>, <a href="https://labarrica.com/category/li rel="tag">Más Vendidos</a></span>
-    price = soup.find("span", class_="woocomer-Price")#None # 
-    stock = soup.find("p", class_="stock") #None # <p class="stock in-stock |stock out-of-stock">Hay existencias</p>
-    product = {"sku": sku, "name" : name, "category" : category, "price": price,"stock" : stock}
+    sku = soup.find("span", class_="sku").text # <span class="sku_wrapper">SKU: <span class="sku">190904</span></span>
+    name = soup.find("h1", class_="product_title").text # None # <h1 class="product_title entry-title">Gin Bombay Sapphire 1000ml</h1>
+    category = soup.find("span", class_="posted_in").text#None # <span class="posted_in">Categorías: <a href="https://labarrica.com/category/licores/gin/" rel="taglabarrica.com/category/licores/" rel="tag">Licores</a>, <a href="https://labarrica.com/category/li rel="tag">Más Vendidos</a></span>
+    price = soup.find("span", class_="woocommerce-Price-amount amount").text#None #
+    stock = soup.find("p", class_= ["stock in-stock", "stock out-of-stock"]).text  #None # <p class="stock in-stock |stock out-of-stock">Hay existencias</p>
+    product = {"Sku": sku, "Name" : name, "Category" : category, "Price": price,"Stock" : stock}
     return product
 
 #list to store all products as dictionaries
 complete_list = []
-for i in valid_urls:
-    product = scrape(i)
+for i in range(len(valid_urls)):
+    product = scrape(valid_urls[i])
     complete_list.append(product)
     
-print(complete_list)
+for i in complete_list:
+    print(i)
     
 
 # list to store products as html
