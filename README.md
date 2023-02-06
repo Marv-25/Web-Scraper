@@ -5,15 +5,15 @@ input is the url
 output a set of products from the website in json.
 
 we need :
-product code
-name
-main category
-stock
+product code,
+name,
+main category,
+stock,
 price
 
-the libraries used are: 
+libraries used are: 
 beautifulsoup4
-requests
+requests among others.
 
 it also uses re and json library in order to identify patterns in urls, and json to convert dictionaries(products) to json format 
 
