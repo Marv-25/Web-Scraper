@@ -17,3 +17,5 @@ requests
 
 it also uses re and json library in order to identify patterns in urls, and json to convert dictionaries(products) to json format 
 
+The docker repository is the following https://hub.docker.com/repository/docker/zelaya26/python_scraper/general
+
