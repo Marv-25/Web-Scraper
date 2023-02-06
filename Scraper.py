@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import pandas as pd
 import json
 import re
 
@@ -38,13 +37,15 @@ def scrape(url):
 
 #list to store all products as dictionaries
 complete_list = []
-for i in range(len(valid_urls)):
-    product = scrape(valid_urls[i])
-    complete_list.append(product)
-    
-# for i in complete_list:
-#     print(i)
+for i in valid_urls:
+    try: 
+        product = scrape(i)
+    except:
+        pass
+    else:
+        complete_list.append(product)
 
-# # json list and/or csv
+
+# # json list and/or
 json_list = json.dumps(complete_list, indent=2)
 print(json_list)
