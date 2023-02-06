@@ -2,7 +2,7 @@
 Web scraper for products from an online store.
 
 input is the url
-output a set of products from the website in json, or csv.
+output a set of products from the website in json.
 
 we need :
 product code
