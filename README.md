@@ -14,6 +14,6 @@ price
 the libraries used are: 
 beautifulsoup4
 requests
-pandas
 
+it also uses re and json library in order to identify patterns in urls, and json to convert dictionaries(products) to json format 
 
